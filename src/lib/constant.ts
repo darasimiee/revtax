@@ -1,7 +1,7 @@
 export const logintype = [
     {
         id:1,
-        name:"TaxPayer",
+        name:"TaxPayer (Individual or Corporate",
         icon: "/users-right.svg",
     },
      {

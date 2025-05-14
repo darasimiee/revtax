@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { LoginFormData, loginSchema } from "@/lib/formSchema";
+import { mobileLoginSchema, MobileLoginFormData } from "@/lib/formSchema";
 import Logo from "@/component/Logo";
 import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,21 +14,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-//import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import FormFields from "@/component/FormFields";
 import { FieldValues, useForm, type SubmitHandler } from "react-hook-form";
 
-export default function LoginPage() {
+export default function MobileLoginPage() {
   const [activeButton, setActiveButton] = useState("login");
   const [isVisible, setIsVisible] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm({ resolver: zodResolver(loginSchema) });
+  } = useForm({ resolver: zodResolver(mobileLoginSchema) });
 
-  const onFormSubmit: SubmitHandler<LoginFormData> = (data) => {
+  const onFormSubmit: SubmitHandler<MobileLoginFormData> = (data) => {
     console.log(data);
   };
 
@@ -70,7 +69,7 @@ export default function LoginPage() {
           ))}
         </SelectContent>
       </Select>
-      <div className="border border-[#E4E7EC] w-[100%] h-[464px] mt-5 rounded-md">
+      <div className="border border-[#E4E7EC] w-[100%] h-[484px] mt-5 rounded-md">
         <div className="border border-[#E4E7EC] p-2 rounded-full mt-5 w-[413px] h-[41px] justify-between items-center flex mx-auto">
           <button
             onClick={() => setActiveButton("login")}
@@ -100,24 +99,26 @@ export default function LoginPage() {
         <h1 className="items-center flex justify-center font-normal mt-1 mb-4 text-sm text-[#667085]">
           Please enter your payer details to access your account.
         </h1>
-       
+
         <form onSubmit={handleSubmit(onFormSubmit)} className="text-center">
           <FormFields
-            type="text"
-            name="email" //I should remember to change this from the API given
-            label="Email Address"
+            type="tel"
+            name="phoneNumber" //I should remember to change this from the API given
+            placeholder="000 000 0000"
+            withCountryCode={true}
+            defaultCountryCode="+234"
+            label="Phone Number"
             labelExtra={
               <div>
                 <Link
-                  href={"/"}
+                  href={"/auth/email-login"}
                   className="text-[#667085] text-[12px] font-bold underline underline-offset-1"
                 >
-                  Use phone number instead
+                  Use email address instead
                 </Link>
               </div>
             }
-            placeholder="Enter your email address"
-            id="email"
+            id="mobile"
             errors={errors}
             register={register as FieldValues["register"]}
             isVisible={isVisible}
@@ -128,6 +129,16 @@ export default function LoginPage() {
           <FormFields
             type="password"
             label="Password"
+            labelExtra={
+              <div>
+                <Link
+                  href={"/forgotpassword"}
+                  className="text-[#667085] text-[12px] font-bold underline underline-offset-1"
+                >
+                  Forgot Password?
+                </Link>
+              </div>
+            }
             name="password"
             placeholder="Password"
             id="username"
@@ -135,7 +146,7 @@ export default function LoginPage() {
             register={register as FieldValues["register"]}
             isVisible={isVisible}
             setIsVisible={setIsVisible}
-            classname="mb-2 p-2 border border-[#F9FAFB]"
+            classname="mb-2 p-2 border-[1px] border-[#F9FAFB]"
             //validate={(value) => validatePassword(value)}
           />
 
@@ -181,10 +192,7 @@ export default function LoginPage() {
             src="/users-right.svg"
             alt="user logo"
           />
-          <Link
-            href={"/"}
-            className="ml-2 "
-          >
+          <Link href={"/"} className="ml-2 ">
             Create account
           </Link>
         </div>
