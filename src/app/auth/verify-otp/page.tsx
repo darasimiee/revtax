@@ -41,7 +41,7 @@ export default function OTP() {
   };
 
   return (
-    <div className="max-w-[445px] mx-auto font-Neue">
+    <div className="max-w-[445px] mx-auto mb-[99px] font-Neue">
       <div className="flex justify-between items-center mb-[24px]">
         <Logo />
         <Link href="./">

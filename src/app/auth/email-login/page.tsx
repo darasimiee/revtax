@@ -131,7 +131,7 @@ export default function LoginPage() {
              labelExtra={
               <div>
                 <Link
-                  href={"/forgotpassword"}
+                  href={"/auth/forgotpassword"}
                   className="text-[#667085] text-[12px] font-bold underline underline-offset-1"
                 >
                   Forgot Password?
