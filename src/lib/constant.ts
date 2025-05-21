@@ -16,3 +16,29 @@ export const logintype = [
     },
 
 ]
+
+export const payerType = [
+    {
+        id:1,
+        name: "Individual",
+    },
+    {
+        id:2,
+        name: "Corporate",
+    },
+     {
+        id:3,
+        name: "Consultant",
+    },
+]
+
+export const domicile = [
+     {
+        id:1,
+        name: "Resident",
+    },
+     {
+        id:2,
+        name: "Diaspora",
+    },
+]

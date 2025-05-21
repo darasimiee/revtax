@@ -1,19 +1,39 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm, SubmitHandler } from "react-hook-form"
+import { z } from "zod"
 import Logo from "@/component/Logo";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
-} from "@/components/ui/input-otp";
+} from "@/components/ui/input-otp"
+ 
 
 export default function OTP() {
   const [timeLeft, setTimeLeft] = useState(240); // 4 minutes in seconds
   const [canResend, setCanResend] = useState(false);
+   const form = useForm({
+   // resolver: zodResolver(FormSchema),
+    defaultValues: {
+      pin: "",
+    },
+  })
+  
 
   useEffect(() => {
     if (timeLeft <= 0) {
@@ -40,6 +60,10 @@ export default function OTP() {
     setCanResend(false);
   };
 
+ const onFormSubmit: SubmitHandler<> = (data) => {
+     console.log(data);
+   };
+
   return (
     <div className="max-w-[445px] mx-auto mb-[99px] font-Neue">
       <div className="flex justify-between items-center mb-[24px]">
@@ -54,22 +78,34 @@ export default function OTP() {
           We have sent a mail to your email address. Please copy the 6-digit code
           you received and paste it here.
         </p>
-        
-        <div className="my-6">
-          <InputOTP maxLength={6}>
-            <InputOTPGroup>
-              <InputOTPSlot index={0} />
-              <InputOTPSlot index={1} />
-              <InputOTPSlot index={2} />
-            </InputOTPGroup>
-            <InputOTPSeparator />
-            <InputOTPGroup>
-              <InputOTPSlot index={3} />
-              <InputOTPSlot index={4} />
-              <InputOTPSlot index={5} />
-            </InputOTPGroup>
-          </InputOTP>
-        </div>
+        <Form {...form} >
+      <form onSubmit={form.handleSubmit(onFormSubmit)}  className="w-full flex flex-col items-center mt-[30px] mb-[24px]">
+        <FormField
+          control={form.control}
+          name="pin"
+          render={({ field }) => (
+            <FormItem >
+             
+              <FormControl>
+                
+                <InputOTP maxLength={6} {...field}>
+                  <InputOTPGroup>
+                    <InputOTPSlot index={0} />
+                    <InputOTPSlot index={1} />
+                    <InputOTPSlot index={2} />
+                    <InputOTPSeparator/>
+                    <InputOTPSlot index={3} />
+                    <InputOTPSlot index={4} />
+                    <InputOTPSlot index={5} />
+                  </InputOTPGroup>
+                </InputOTP>
+              </FormControl>
+             
+              <FormMessage />
+            </FormItem>
+          )} 
+        />
+    
 
         <p className="mt-[20px] text-[#667085] text-sm">
           {canResend ? (
@@ -91,6 +127,8 @@ export default function OTP() {
           >
             Reset Password
           </button>
+           </form>
+    </Form>
       </div>
     </div>
   );
