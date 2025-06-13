@@ -57,7 +57,7 @@ export default function OTP() {
     setCanResend(false);
   };
 
-  const onFormSubmit: SubmitHandler<any> = (data) => {
+  const onFormSubmit: SubmitHandler<> = (data) => {
     console.log(data);
   };
 
