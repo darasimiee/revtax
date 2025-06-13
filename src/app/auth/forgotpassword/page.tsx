@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import FormFields from "@/component/FormFields";
 import { FieldValues, useForm, type SubmitHandler } from "react-hook-form";
+import { ModeToggle } from "@/component/Logotheme";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -37,10 +38,9 @@ export default function LoginPage() {
   return (
     <div className="max-w-[445px] mx-auto font-Neue">
       <div className="flex justify-between items-center mb-[24px]">
-        <Logo />
-        <Link href="./">
-          <Image width={32} height={32} src="/darkmode.svg" alt="darkmode" />
-        </Link>
+         <Logo />
+        
+                <ModeToggle />
       </div>
 
       <div className="border border-[#E4E7EC] w-[100%] h-[376px] mt-[40px] rounded-md">

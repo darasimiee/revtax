@@ -17,8 +17,16 @@ import {
 import Link from "next/link";
 import FormFields from "@/component/FormFields";
 import { FieldValues, useForm, type SubmitHandler } from "react-hook-form";
+import { ModeToggle } from "@/component/Logotheme";
+import useMetaArgs from "@/hooks/useMetaArgs";
 
 export default function MobileLoginPage() {
+  useMetaArgs({
+      title: "Login - Revtax",
+      description:
+        "Revenue and tax collection",
+      keywords: "Revenue, taxes",
+    });
   const [activeButton, setActiveButton] = useState("login");
   const [isVisible, setIsVisible] = useState(false);
   const {
@@ -35,12 +43,10 @@ export default function MobileLoginPage() {
     <div className="max-w-[445px] mx-auto font-Neue">
       <div className="flex justify-between items-center mb-[24px]">
         <Logo />
-        <Link href="./">
-          <Image width={32} height={32} src="/darkmode.svg" alt="darkmode" />
-        </Link>
+       <ModeToggle />
       </div>
 
-      <h1 className="font-bold text-[14px] text-[#182230] mb-[10px] ">
+      <h1 className="font-bold text-[14px] text-[#182230] mb-[10px] dark:text-[#F0F1F1] ">
         Login type
       </h1>
       <Select>
@@ -69,13 +75,13 @@ export default function MobileLoginPage() {
           ))}
         </SelectContent>
       </Select>
-      <div className="border border-[#E4E7EC] w-[100%] h-[484px] mt-5 rounded-md">
-        <div className="border border-[#E4E7EC] p-2 rounded-full mt-5 w-[413px] h-[41px] justify-between items-center flex mx-auto">
+      <div className=" dark:border-[#393B41] border border-[#E4E7EC] w-[100%] h-[484px] mt-5 rounded-md">
+        <div className=" dark:border-[#393B41] border border-[#E4E7EC] p-2 rounded-full mt-5 w-[413px] h-[41px] justify-between items-center flex mx-auto">
           <button
             onClick={() => setActiveButton("login")}
             className={
               activeButton === "login"
-                ? "border border-[#E4E7EC] rounded-full px-8 py-1 w-[203px] text-[#101828] font-medium text-base"
+                ? " dark:border-[#393B41] border border-[#E4E7EC] rounded-full px-8 py-1 w-[203px] text-[#101828] font-medium text-base"
                 : "px-4 py-1 text-[#667085]"
             }
           >
@@ -85,7 +91,7 @@ export default function MobileLoginPage() {
             onClick={() => setActiveButton("createAccount")}
             className={
               activeButton === "createAccount"
-                ? "border border-[#E4E7EC] rounded-full px-8 py-1 w-[203px] text-[#101828] font-medium text-base"
+                ? "dark:border-[#393B41] border border-[#E4E7EC] rounded-full px-8 py-1 w-[203px] text-[#101828] font-medium text-base"
                 : "px-4 py-1 text-[#667085]"
             }
           >
@@ -146,11 +152,11 @@ export default function MobileLoginPage() {
             register={register as FieldValues["register"]}
             isVisible={isVisible}
             setIsVisible={setIsVisible}
-            classname="mb-2 p-2 border-[1px] border-[#F9FAFB]"
+            classname="mb-2 p-2"
             //validate={(value) => validatePassword(value)}
           />
 
-          <div className="border border-[#E4E7EC] p-[8px] border-h-[57px] rounded-md mt-5 w-[413px] h-[41px] justify-between items-center flex mx-auto">
+          <div className="dark:border-[#393B41] border border-[#E4E7EC] p-[8px] border-h-[57px] rounded-md mt-5 w-[413px] h-[41px] justify-between items-center flex mx-auto">
             <div>
               <Checkbox />
               <span className="text-[#475467] ml-3">I am not a robot</span>
@@ -183,7 +189,7 @@ export default function MobileLoginPage() {
           </button>
         </form>
       </div>
-      <div className="border border-[#E4E7EC] p-[8px] mx-auto rounded-md flex justify-between items-center mt-3 text-[#667085] text-[14px] font-medium">
+      <div className="dark:border-[#393B41] border border-[#E4E7EC] p-[8px] mx-auto rounded-md flex justify-between items-center mt-3 text-[#667085] text-[14px] font-medium">
         <p>New to Revtax?</p>
         <div className="flex justify-center items-center border w-fit bg-[#F2F4F7] p-2 rounded-md ">
           <Image

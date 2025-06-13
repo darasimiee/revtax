@@ -1,7 +1,10 @@
-export const logintype = [
+export const logintype = 
+[
+    
     {
         id:1,
         name:"TaxPayer (Individual or Corporate",
+
         icon: "/users-right.svg",
     },
      {
@@ -41,4 +44,36 @@ export const domicile = [
         id:2,
         name: "Diaspora",
     },
+]
+export const idtype = [
+    {
+        id:1,
+        name:"NIN",
+    },
+    {
+        id:2,
+        name:"BVN"
+    }
+]
+
+export const cities = [
+    {
+        id:1,
+        name:"Lagos",
+    },
+    {
+        id:2,
+        name:"Abuja"
+    }
+]
+
+export const localgovts = [
+    {
+        id:1,
+        name:"Surulere",
+    },
+    {
+        id:2,
+        name:"Apapa-Iganmu"
+    }
 ]

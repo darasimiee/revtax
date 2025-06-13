@@ -7,7 +7,7 @@ import { LoginFormData } from "@/lib/formSchema";
 import Logo from "@/component/Logo";
 import Image from "next/image";
 //import { zodResolver } from "@hookform/resolvers/zod";
-import { domicile, payerType } from "@/lib/constant";
+import { domicile, idtype, payerType } from "@/lib/constant";
 import {
   Form,
   FormControl,
@@ -39,17 +39,16 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { ModeToggle } from "@/component/Logotheme";
 import useMetaArgs from "@/hooks/useMetaArgs";
+//import FormFields from "@/component/FormFields";
 
-
-export default function DiasporaPage() {
-   useMetaArgs({
-    title: "Diaspora signup - Revtax",
-    description:
-      "Revenue and tax collection",
+export default function ResidentPage() {
+  useMetaArgs({
+    title: "Resident signup - Revtax",
+    description: "Revenue and tax collection",
     keywords: "Revenue, taxes",
   });
   const [activeButton, setActiveButton] = useState("login");
-  const {theme} = useTheme();
+  const { theme } = useTheme();
 
   const form = useForm({
     // resolver: zodResolver(),
@@ -166,72 +165,74 @@ export default function DiasporaPage() {
                 />
               </div>
             </div>
-            <div className="p-4 flex flex-col dark:text-[#94969C]">
-              <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem>
+            <div className="flex ">
+              <div className="p-4 flex flex-col dark:text-[#94969C]">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        ID Type <span className="text-red-600">*</span>
+                      </FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="w-[197px]">
+                            <SelectValue placeholder="Select an ID" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {idtype.map(({ id, name }) => (
+                            <SelectItem key={id} value={name}>{name}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="p-4 flex flex-col dark:text-[#94969C] w-[197px]">
+                <FormField
+                  control={form.control}
+                  name="id_number"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        ID Number<span className="text-red-600">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter your ID number" {...field} />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+
+            <div className="p-4 flex flex-col dark:text-[#94969C] ">
+             <FormField
+             control={form.control}
+             name="email"
+             render={({field}) =>(
+                <FormItem>
                     <FormLabel>
-                      Passport Number<span className="text-red-600">*</span>
+                        Email <span className="text-red-600">*</span>
                     </FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Enter your passport number"
-                        {...field}
-                      />
+                        <Input placeholder="Enter your email" {...field}/>
                     </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <label
-              htmlFor="passport"
-              className="dark:text-[#94969C] cursor-pointer border-[1px] max-w-[410px] mx-auto h-[114px] rounded-md flex flex-col justify-center text-center items-center "
-            >
-              {theme === "dark" ? <Image
-                width={32}
-                height={32}
-                src="/darkpassportimg.svg"
-                alt="image"
-                className="mt-6"
-              />: <Image
-                width={32}
-                height={32}
-                src="/passportimage.svg"
-                alt="image"
-                className="mt-6"
-              />}
-              
-              <p className="text-[14px] dark:text-[#F0F1F1]">
-                Click here to upload your file or drag and drop
-              </p>
-              <p className="text-[#98A2B3] text-[12px]">
-                Supported Format: JPEG, JPG, PNG(10MB Max)
-              </p>
-            </label>
-            <FormField
-              control={form.control}
-              name="passport"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      type="file"
-                      placeholder="shadcn"
-                      {...field}
-                      className="hidden"
-                      accept="image/*"
-                      id="passport"
-                    />
-                  </FormControl>
-
-                  <FormMessage />
+                    <FormMessage/>
                 </FormItem>
-              )}
-            />
+             )}/>
+            </div>
+
             {/* For the image to show, I need to ask backend if it should be sent as base64 or url string and if the user wants the preview of the file */}
             <div className="p-4 flex flex-col dark:text-[#94969C]">
               <FormField
@@ -284,7 +285,9 @@ export default function DiasporaPage() {
             <div className=" dark:border-[#393B41] border border-[#E4E7EC] p-[8px] border-h-[57px] rounded-md mt-5 w-[413px] h-[41px] justify-between items-center flex mx-auto">
               <div>
                 <Checkbox />
-                <span className="text-[#475467] ml-3 dark:text-[#CECFD2]">I am not a robot</span>
+                <span className="text-[#475467] ml-3 dark:text-[#CECFD2]">
+                  I am not a robot
+                </span>
               </div>
               <div className="flex gap-4 justify-center">
                 <Image
@@ -318,18 +321,22 @@ export default function DiasporaPage() {
       <div className=" dark:border-[#393B41] dark:text-[#94969C] border border-[#E4E7EC] p-[8px] mx-auto rounded-md flex justify-between items-center mt-3 text-[#667085] text-[14px] font-medium">
         <p>Already joined RevTax?</p>
         <div className=" dark:bg-[#252629] dark:text-[#CECFD2] flex justify-center items-center border w-fit bg-[#F2F4F7] p-2 rounded-md ">
-         {theme === "dark" ? <Image
-            width={13.33}
-            height={12}
-            src="/users-rightdark.svg"
-            alt="user logo"
-          />:  <Image
-            width={13.33}
-            height={12}
-            src="/users-right.svg"
-            alt="user logo"
-          /> }
-         
+          {theme === "dark" ? (
+            <Image
+              width={13.33}
+              height={12}
+              src="/users-rightdark.svg"
+              alt="user logo"
+            />
+          ) : (
+            <Image
+              width={13.33}
+              height={12}
+              src="/users-right.svg"
+              alt="user logo"
+            />
+          )}
+
           <Link href={"/auth/email-login"} className="ml-2  ">
             Log in
           </Link>

@@ -23,10 +23,9 @@ interface FormFieldsProps {
 
 const countryCodes = [
   { code: "+234", flag: "🇳🇬" },
-  { code: "+1",  flag: "🇺🇸" },
-  { code: "+44",  flag: "🇬🇧" },
-  { code: "+233",  flag: "🇬🇭" },
-  
+  { code: "+1", flag: "🇺🇸" },
+  { code: "+44", flag: "🇬🇧" },
+  { code: "+233", flag: "🇬🇭" },
 ];
 
 export default function FormFields({
@@ -60,19 +59,19 @@ export default function FormFields({
       <div className="flex justify-between items-center">
         <label
           htmlFor={id}
-          className="text-[#667085] text-[14px] font-bold flex items-center gap-1"
+          className="text-[#667085] text-[14px] font-bold flex items-center gap-1 dark:text-[#CECFD2]"
         >
           {isRequired && <span className="text-red-600">*</span>}
           {label}
         </label>
-        {labelExtra}
+        <div className="dark:text-[#94969C]">{labelExtra}</div>
       </div>
-      
+
       <div className="mt-2">
         {withCountryCode && type === "tel" ? (
-          <div className="flex items-center border-[1px] border-[#E4E7EC] rounded-md h-[48px]">
+          <div className="flex items-center border-[1px] dark:border-[#393B41] border-[#E4E7EC] rounded-md h-[48px]">
             {/* Country code selector */}
-            <div className="relative flex items-center px-3 border-r border-[#E4E7EC] h-full">
+            <div className="relative flex items-center px-3 dark:border-[#393B41] border-r border-[#E4E7EC] h-full">
               <button
                 type="button"
                 onClick={() => setShowCountryDropdown(!showCountryDropdown)}
@@ -82,9 +81,9 @@ export default function FormFields({
                 <span className="text-zinc-800">{selectedCountry.code}</span>
                 <ChevronDown className="h-4 w-4 ml-1 text-gray-500" />
               </button>
-              
+
               {showCountryDropdown && (
-                <div className="absolute z-10 top-full left-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg w-48 max-h-60 overflow-auto">
+                <div className="absolute z-10 top-full left-0 mt-1 bg-white border dark:bg-[#393B41] dark:border-[#393B41] border-gray-200 rounded-md shadow-lg w-48 max-h-60 overflow-auto">
                   {countryCodes.map((country) => (
                     <div
                       key={country.code}
@@ -102,7 +101,7 @@ export default function FormFields({
                 </div>
               )}
             </div>
-            
+
             {/* Phone number input */}
             <input
               id={id}
@@ -121,9 +120,9 @@ export default function FormFields({
               disabled={disabled}
               type={isVisible ? "text" : type}
               {...register(name, { validate })}
-              className="h-[48px] w-full border-[1px] border-[#E4E7EC] rounded-md py-[2px] pl-3 text-zinc-800 pr-10"
+              className="h-[48px] w-full border-[1px] border-[#E4E7EC] rounded-md py-[2px] pl-3 text-zinc-800 pr-10 dark:border-[#393B41]"
             />
-            
+
             {type === "password" && setIsVisible && (
               <button
                 type="button"
